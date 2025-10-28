@@ -1,148 +1,68 @@
 import { openai } from '@ai-sdk/openai';
-import { streamText, convertToCoreMessages } from 'ai';
-import type { Tool, ToolSet } from 'ai';
-import { z } from 'zod';
+import { streamText, convertToModelMessages, jsonSchema } from 'ai';
+import type { Tool, ToolSet, JSONSchema7 } from 'ai';
 import { listMCPTools, callMCPTool, getMCPResource } from '@/lib/mcpClient';
+import type { WidgetMetaData, MCPToolResult } from '@/lib/mcpClient';
 
-type JsonSchema = {
-  type?: string | string[] | null;
-  description?: string;
-  properties?: Record<string, JsonSchema | undefined>;
-  required?: string[];
-  items?: JsonSchema;
-  enum?: Array<string | number | boolean>;
-  anyOf?: JsonSchema[];
-  oneOf?: JsonSchema[];
-  allOf?: JsonSchema[];
-  default?: unknown;
-};
+const isJsonSchema = (schema: unknown): schema is JSONSchema7 =>
+  Boolean(schema) && typeof schema === 'object' && !Array.isArray(schema);
 
-const toTypeArray = (type?: string | string[] | null): string[] => {
-  if (!type) {
-    return [];
-  }
-
-  return Array.isArray(type) ? type : [type];
-};
-
-const applyDescription = <T extends z.ZodTypeAny>(schema: T, description?: string) =>
-  description ? schema.describe(description) : schema;
-
-const buildZodFromJsonSchema = (schema?: JsonSchema): z.ZodTypeAny => {
+// Rough check so we only coerce missing args to `{}` when the schema actually
+// expects an object (or unions/intersections that can resolve to one).
+const schemaImpliesObject = (schema?: JSONSchema7): boolean => {
   if (!schema) {
-    return z.unknown();
+    return true;
   }
 
-  if (schema.enum && schema.enum.length > 0) {
-    const enumValues = schema.enum;
-    const stringValues = enumValues.filter((value): value is string => typeof value === 'string');
+  const { type, properties, anyOf, oneOf, allOf } = schema;
 
-    if (stringValues.length === enumValues.length && stringValues.length > 0) {
-      return applyDescription(
-        z.enum([stringValues[0], ...stringValues.slice(1)] as [string, ...string[]]),
-        schema.description
-      );
+  if (properties && Object.keys(properties).length > 0) {
+    return true;
+  }
+
+  if (type) {
+    const types = (Array.isArray(type) ? type : [type]).map((value) => String(value));
+    if (types.some((value) => value === 'object' || value === 'null' || value === 'None')) {
+      return true;
     }
+    return false;
   }
 
-  const types = toTypeArray(schema.type);
-
-  if (types.includes('string')) {
-    return applyDescription(z.string(), schema.description);
+  const compositeGroups = [anyOf, oneOf, allOf];
+  if (
+    compositeGroups.some((group) =>
+      group?.some(
+        (entry) => typeof entry === 'object' && entry !== null && schemaImpliesObject(entry as JSONSchema7)
+      )
+    )
+  ) {
+    return true;
   }
 
-  if (types.includes('number') || types.includes('integer')) {
-    const base = z.number();
-    return applyDescription(types.includes('integer') ? base.int() : base, schema.description);
-  }
-
-  if (types.includes('boolean')) {
-    return applyDescription(z.boolean(), schema.description);
-  }
-
-  if (types.includes('array')) {
-    const itemSchema = buildZodFromJsonSchema(schema.items);
-    return applyDescription(z.array(itemSchema), schema.description);
-  }
-
-  if (types.includes('object') || schema.properties) {
-    return buildZodObjectSchema(schema);
-  }
-
-  if (schema.anyOf?.length) {
-    return applyDescription(z.union(schema.anyOf.map(buildZodFromJsonSchema)), schema.description);
-  }
-
-  if (schema.oneOf?.length) {
-    return applyDescription(z.union(schema.oneOf.map(buildZodFromJsonSchema)), schema.description);
-  }
-
-  if (schema.allOf?.length) {
-    const [first, ...rest] = schema.allOf;
-    const initial = buildZodFromJsonSchema(first);
-    return applyDescription(
-      rest.reduce(
-        (acc, current) => z.intersection(acc, buildZodFromJsonSchema(current)),
-        initial
-      ),
-      schema.description
-    );
-  }
-
-  return applyDescription(z.unknown(), schema.description);
+  return true;
 };
 
-const buildZodObjectSchema = (schema?: JsonSchema) => {
-  const requiredKeys = new Set(schema?.required ?? []);
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === 'object' && value !== null && !Array.isArray(value);
 
-  const properties = Object.entries(schema?.properties ?? {}).reduce<
-    Record<string, z.ZodTypeAny>
-  >((acc, [key, value]) => {
-    const propertySchema = buildZodFromJsonSchema(value);
-    acc[key] = requiredKeys.has(key) ? propertySchema : propertySchema.optional();
-    return acc;
-  }, {});
+type MCPToolExecuteInput = Record<string, unknown> | undefined;
 
-  return applyDescription(z.object(properties).strip(), schema?.description);
+type MCPToolExecuteResult = {
+  text: string;
+  metadata: WidgetMetaData;
+  structuredContent: MCPToolResult['structuredContent'];
+  widgetHtml: string | null;
 };
 
-const buildToolParameterSchema = (schema?: JsonSchema) => {
-  const types = toTypeArray(schema?.type);
-
-  if (!schema || types.includes('object') || schema.properties) {
-    return buildZodObjectSchema(schema);
+const normalizeToolArguments = (
+  args: unknown,
+  schema?: JSONSchema7
+): MCPToolExecuteInput => {
+  if (!schemaImpliesObject(schema)) {
+    return isRecord(args) ? args : undefined;
   }
 
-  if (types.length === 0 || types.includes('null') || types.includes('None')) {
-    return z.object({});
-  }
-
-  const valueSchema = buildZodFromJsonSchema(schema);
-
-  return z
-    .object({
-      value: valueSchema,
-    })
-    .strict()
-    .describe(schema.description ?? 'Auto-generated wrapper for non-object schema');
-};
-
-const normalizeToolArguments = (args: unknown, schema?: JsonSchema): unknown => {
-  const types = toTypeArray(schema?.type);
-
-  if (!schema || types.includes('object') || schema?.properties) {
-    return (args as Record<string, unknown>) ?? {};
-  }
-
-  if (types.length === 0 || types.includes('null') || types.includes('None')) {
-    return {};
-  }
-
-  if (args && typeof args === 'object' && 'value' in args) {
-    return (args as { value: unknown }).value;
-  }
-
-  return args;
+  return isRecord(args) ? args : {};
 };
 
 export const maxDuration = 30;
@@ -157,18 +77,14 @@ export async function POST(req: Request) {
 
   for (const mcpTool of mcpTools) {
     const toolName = mcpTool.name;
-    const schema = (mcpTool.inputSchema ?? undefined) as JsonSchema | undefined;
-    console.log('[Chat] Tool schema', toolName, JSON.stringify(schema));
-    const parameters = buildToolParameterSchema(schema);
+    const schema = isJsonSchema(mcpTool.inputSchema) ? mcpTool.inputSchema : undefined;
 
-    const executeFunc = async (args: unknown) => {
-      const parsedArgs = parameters.parse(args ?? {});
-      const normalizedArgs = normalizeToolArguments(parsedArgs, schema);
+    const executeFunc = async (args: MCPToolExecuteInput): Promise<MCPToolExecuteResult> => {
+      const normalizedArgs = normalizeToolArguments(args, schema);
       console.log(`[Chat] Calling MCP tool ${toolName} with args:`, normalizedArgs);
       const result = await callMCPTool(toolName, normalizedArgs);
-      console.log('[Chat] MCP tool result', toolName, JSON.stringify(result, null, 2));
 
-      const metadata = { ...(result._meta ?? {}) };
+      const metadata: WidgetMetaData = { ...(result._meta ?? {}) };
       const structuredContent = result.structuredContent;
 
       let widgetHtml: string | null = null;
@@ -193,9 +109,10 @@ export async function POST(req: Request) {
       };
     };
 
-    const toolDefinition: Tool<z.infer<typeof parameters>, unknown> = {
+    const defaultInputSchema: JSONSchema7 = { type: 'object' };
+    const toolDefinition: Tool<MCPToolExecuteInput, MCPToolExecuteResult> = {
       description: mcpTool.description || `Call ${toolName}`,
-      inputSchema: parameters,
+      inputSchema: jsonSchema(schema ?? defaultInputSchema),
       execute: executeFunc,
     };
 
@@ -203,14 +120,12 @@ export async function POST(req: Request) {
     console.log('[Chat] Registered tool', toolName, toolDefinition);
   }
 
-  const coreMessages = convertToCoreMessages(
-    messages.map((message) => {
-      const { id: _ignore, ...rest } = message;
-      void _ignore;
-      return rest;
-    }),
-    { tools }
-  );
+  const sanitizedMessages = messages.map(({ id: _unused, ...rest }) => {
+    void _unused;
+    return rest;
+  }) as Parameters<typeof convertToModelMessages>[0];
+
+  const coreMessages = convertToModelMessages(sanitizedMessages, { tools });
 
   const result = streamText({
     model: openai('gpt-4o'),

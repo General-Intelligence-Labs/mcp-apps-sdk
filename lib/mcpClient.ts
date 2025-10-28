@@ -60,7 +60,7 @@ export async function listMCPTools() {
 
 export async function callMCPTool(
   toolName: string,
-  args: unknown
+  args: Record<string, unknown> | undefined
 ): Promise<MCPToolResult> {
   const client = await getMCPClient();
   const result = await client.callTool({

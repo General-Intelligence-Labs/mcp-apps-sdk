@@ -75,16 +75,6 @@ export async function GET(
             '*'
           );
         }
-        try {
-          navigator.sendBeacon('/api/widget/log', JSON.stringify({ id: widgetId, event: serialized }));
-        } catch (err) {
-          fetch('/api/widget/log', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: widgetId, event: serialized }),
-            keepalive: true,
-          }).catch(() => {});
-        }
       };
 
       const patchConsole = () => {
