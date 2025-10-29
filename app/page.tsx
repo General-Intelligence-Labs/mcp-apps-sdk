@@ -2,7 +2,7 @@
 
 import { useChat } from '@ai-sdk/react';
 import { useState } from 'react';
-import AssistantAppEmbed from '@/components/AssistantAppEmbed';
+import { AssistantAppEmbed } from '@/packages/widget-kit/src';
 
 export default function Chat() {
   const [input, setInput] = useState('');
