@@ -1,0 +1,61 @@
+{
+  "name": "@xalia/mcp-client",
+  "version": "0.1.0",
+  "description": "TypeScript client for Model Context Protocol (MCP) servers",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./transports": {
+      "types": "./dist/transports/index.d.ts",
+      "import": "./dist/transports/index.mjs",
+      "require": "./dist/transports/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "echo \"No tests yet\"",
+    "lint": "eslint src",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist node_modules"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.2",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^9.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/general-intelligence-labs/mcp-apps-sdk.git",
+    "directory": "packages/mcp-client"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "tools",
+    "client",
+    "xalia"
+  ],
+  "author": "General Intelligence Labs",
+  "license": "MIT"
+}

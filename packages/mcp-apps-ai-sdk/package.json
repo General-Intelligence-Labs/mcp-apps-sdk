@@ -1,0 +1,80 @@
+{
+  "name": "@xalia/mcp-apps-ai-sdk",
+  "version": "0.1.0",
+  "description": "Adapters for integrating MCP tools with popular AI SDKs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./openai": {
+      "types": "./dist/openai.d.ts",
+      "import": "./dist/openai.mjs",
+      "require": "./dist/openai.js"
+    },
+    "./vercel": {
+      "types": "./dist/vercel.d.ts",
+      "import": "./dist/vercel.mjs",
+      "require": "./dist/vercel.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "echo \"No tests yet\"",
+    "lint": "eslint src",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist node_modules"
+  },
+  "peerDependencies": {
+    "@ai-sdk/openai": "^2.0.0",
+    "@ai-sdk/react": "^2.0.0",
+    "@xalia/mcp-client": "workspace:*",
+    "ai": "^5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@ai-sdk/openai": {
+      "optional": true
+    },
+    "@ai-sdk/react": {
+      "optional": true
+    },
+    "ai": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@xalia/mcp-client": "workspace:*",
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^9.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/general-intelligence-labs/mcp-apps-sdk.git",
+    "directory": "packages/mcp-apps-ai-sdk"
+  },
+  "keywords": [
+    "mcp",
+    "openai",
+    "vercel-ai",
+    "adapter",
+    "ai-sdk",
+    "xalia"
+  ],
+  "author": "General Intelligence Labs",
+  "license": "MIT"
+}

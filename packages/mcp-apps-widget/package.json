@@ -1,0 +1,69 @@
+{
+  "name": "@xalia/mcp-apps-widget",
+  "version": "0.1.0",
+  "description": "React components and utilities for rendering MCP app widgets in iframes",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./server": {
+      "types": "./dist/server/index.d.ts",
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "echo \"No tests yet\"",
+    "lint": "eslint src",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist node_modules"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "clsx": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^9.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/general-intelligence-labs/mcp-apps-sdk.git",
+    "directory": "packages/mcp-apps-widget"
+  },
+  "keywords": [
+    "mcp",
+    "openai",
+    "apps",
+    "widgets",
+    "react",
+    "iframe",
+    "xalia"
+  ],
+  "author": "General Intelligence Labs",
+  "license": "MIT"
+}

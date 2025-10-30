@@ -1,0 +1,39 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"],
+      "@xalia/mcp-apps-widget": ["../../packages/mcp-apps-widget/src"],
+      "@xalia/mcp-apps-widget/*": ["../../packages/mcp-apps-widget/src/*"],
+      "@xalia/mcp-client": ["../../packages/mcp-client/src"],
+      "@xalia/mcp-client/*": ["../../packages/mcp-client/src/*"],
+      "@xalia/mcp-apps-ai-sdk": ["../../packages/mcp-apps-ai-sdk/src"],
+      "@xalia/mcp-apps-ai-sdk/*": ["../../packages/mcp-apps-ai-sdk/src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"],
+  "references": [
+    { "path": "../../packages/mcp-apps-widget" },
+    { "path": "../../packages/mcp-client" },
+    { "path": "../../packages/mcp-apps-ai-sdk" }
+  ]
+}

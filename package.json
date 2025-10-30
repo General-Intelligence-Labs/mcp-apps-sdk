@@ -1,32 +1,36 @@
 {
-  "name": "my-ai-app",
-  "version": "0.1.0",
+  "name": "mcp-apps-sdk",
+  "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+  "description": "SDK for building MCP-powered applications with OpenAI Apps",
+  "homepage": "https://github.com/general-intelligence-labs/mcp-apps-sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/general-intelligence-labs/mcp-apps-sdk.git"
   },
-  "dependencies": {
-    "@ai-sdk/openai": "^2.0.55",
-    "@ai-sdk/react": "^2.0.81",
-    "@modelcontextprotocol/sdk": "^1.20.2",
-    "ai": "^5.0.81",
-    "next": "16.0.0",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "zod": "^4.1.12"
+  "license": "MIT",
+  "author": "General Intelligence Labs",
+  "scripts": {
+    "build": "pnpm run -r build",
+    "dev": "pnpm run --parallel dev",
+    "test": "pnpm run -r test",
+    "lint": "pnpm run -r lint",
+    "type-check": "pnpm run -r type-check",
+    "clean": "pnpm run -r clean && rm -rf node_modules",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.0.0",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@changesets/cli": "^2.27.0",
+    "@types/node": "^20.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
   },
-  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+  "packageManager": "pnpm@10.0.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=10.0.0"
+  }
 }

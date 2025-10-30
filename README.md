@@ -1,36 +1,155 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MCP Apps SDK
 
-## Getting Started
+Open-source SDK for building applications with the Model Context Protocol (MCP) and OpenAI Apps framework.
 
-First, run the development server:
+This SDK is designed for two types of developers:
+- **Agent developers** who want to integrate MCP-based App UI into their own agents
+- **MCP app developers** who are developing MCP-based Apps that can be inlined in ChatGPT and other platforms
+
+## 📦 Packages
+
+This monorepo contains three core packages:
+
+### [@xalia/mcp-apps-widget](./packages/mcp-apps-widget)
+React components and utilities for rendering MCP app widgets in secure iframes with PostMessage communication.
+
+### [@xalia/mcp-client](./packages/mcp-client)
+TypeScript client for connecting to and interacting with MCP servers, including tool discovery and execution.
+
+### [@xalia/mcp-apps-ai-sdk](./packages/mcp-apps-ai-sdk)
+Adapters for integrating MCP tools with popular AI SDKs like Vercel AI SDK and OpenAI.
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- pnpm 10+
+- An MCP server running (default: `http://localhost:8002/mcp`)
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repository
+git clone https://github.com/general-intelligence-labs/mcp-apps-sdk.git
+cd mcp-apps-sdk
+
+# Install dependencies
+pnpm install
+
+# Build all packages
+pnpm build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Run the Example
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Navigate to the chatbot example
+cd examples/chatbot
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Set up your OpenAI API key
+cp .env.local.example .env.local
+# Edit .env.local and add your OPENAI_API_KEY
 
-## Learn More
+# Start the development server
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) to see the chatbot with MCP tool integration.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💻 Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Project Structure
 
-## Deploy on Vercel
+```
+mcp-apps-sdk/
+├── packages/
+│   ├── mcp-apps-widget/     # Widget rendering components
+│   ├── mcp-client/           # MCP protocol client
+│   └── mcp-apps-ai-sdk/      # AI SDK adapters
+├── examples/
+│   └── chatbot/              # Example Next.js chatbot app
+└── package.json              # Root package.json
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Available Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# Build all packages
+pnpm build
+
+# Run all packages in development mode
+pnpm dev
+
+# Run tests
+pnpm test
+
+# Lint code
+pnpm lint
+
+# Clean all build artifacts
+pnpm clean
+```
+
+## 📚 Using the Packages
+
+### For Agent Developers
+
+Install the widget package to render MCP app widgets:
+
+```bash
+npm install @xalia/mcp-apps-widget
+```
+
+```tsx
+import { AssistantAppEmbed } from '@xalia/mcp-apps-widget';
+
+function MyApp() {
+  return (
+    <AssistantAppEmbed
+      widgetHtml={widgetHtml}
+      toolOutput={result}
+      metadata={metadata}
+    />
+  );
+}
+```
+
+### For MCP App Developers
+
+Use the complete SDK to build MCP-powered applications:
+
+```bash
+npm install @xalia/mcp-client @xalia/mcp-apps-ai-sdk
+```
+
+```typescript
+import { createMCPClient, connectMCPClient } from '@xalia/mcp-client';
+import { createVercelAITools } from '@xalia/mcp-apps-ai-sdk/vercel';
+
+// Connect to MCP server
+const client = await createMCPClient({ name: 'my-app', version: '1.0.0' });
+await connectMCPClient(client, transport);
+
+// Convert MCP tools for use with AI SDKs
+const tools = await createVercelAITools(client);
+```
+
+## 📖 Documentation
+
+- [OpenAI Apps SDK Documentation](https://developers.openai.com/apps-sdk/)
+- [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
+- [Package-specific READMEs](./packages/)
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
+
+## 📄 License
+
+MIT License - see [LICENSE](./LICENSE) for details.
+
+## 🔗 Links
+
+- [GitHub Repository](https://github.com/general-intelligence-labs/mcp-apps-sdk)
+- [npm Packages](https://www.npmjs.com/org/xalia)
+- [Issue Tracker](https://github.com/general-intelligence-labs/mcp-apps-sdk/issues)
