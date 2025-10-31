@@ -1,8 +1,14 @@
 import { z } from 'zod';
-import type { CoreTool } from 'ai';
 import type { Client } from '@xalia/mcp-client';
 import { listTools, callTool, readResource } from '@xalia/mcp-client';
 import type { MCPTool, MCPToolResult, WidgetMetaData } from '@xalia/mcp-client';
+
+// CoreTool type for Vercel AI SDK
+type CoreTool = {
+  description?: string;
+  inputSchema: z.ZodTypeAny;
+  execute: (args: any) => Promise<any>;
+};
 
 function normalizeToolArguments(
   args: Record<string, unknown> | undefined
@@ -83,7 +89,7 @@ export async function createVercelAITools(
 
     tools[mcpTool.name] = {
       description: mcpTool.description || `MCP Tool: ${mcpTool.name}`,
-      parameters: zodSchema,
+      inputSchema: zodSchema,
       execute: executeFunc,
     };
   }

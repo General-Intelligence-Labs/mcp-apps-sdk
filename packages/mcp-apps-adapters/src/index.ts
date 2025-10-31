@@ -2,7 +2,7 @@ export type {
   MCPToolWithWidget,
   MCPToolExecutor,
   ToolAdapter,
-} from './types.js';
+} from './types';
 
 // Note: Each adapter is imported separately to allow tree-shaking
 // Users import only what they need:

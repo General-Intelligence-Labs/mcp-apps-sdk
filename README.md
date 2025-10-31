@@ -1,10 +1,12 @@
 # MCP Apps SDK
 
-Open-source SDK for building applications with the Model Context Protocol (MCP) and OpenAI Apps framework.
+[![CI](https://github.com/general-intelligence-labs/mcp-apps-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/general-intelligence-labs/mcp-apps-sdk/actions/workflows/ci.yml)
 
-This SDK is designed for two types of developers:
+Open-source SDK for building applications with the Model Context Protocol (MCP) that is compatible with [OpenAI Apps SDK](https://developers.openai.com/apps-sdk).
+
+This SDK is useful for two types of developers:
 - **Agent developers** who want to integrate MCP-based App UI into their own agents
-- **MCP app developers** who are developing MCP-based Apps that can be inlined in ChatGPT and other platforms
+- **MCP App developers** who are developing MCP-based Apps that can be integrated with ChatGPT and other agents
 
 ## 📦 Packages
 
@@ -134,12 +136,6 @@ await connectMCPClient(client, transport);
 const tools = await createVercelAITools(client);
 ```
 
-## 📖 Documentation
-
-- [OpenAI Apps SDK Documentation](https://developers.openai.com/apps-sdk/)
-- [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
-- [Package-specific READMEs](./packages/)
-
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
@@ -148,8 +144,7 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 
 MIT License - see [LICENSE](./LICENSE) for details.
 
-## 🔗 Links
+## 🔗 External Resources
 
-- [GitHub Repository](https://github.com/general-intelligence-labs/mcp-apps-sdk)
-- [npm Packages](https://www.npmjs.com/org/xalia)
-- [Issue Tracker](https://github.com/general-intelligence-labs/mcp-apps-sdk/issues)
+- [OpenAI Apps SDK Documentation](https://developers.openai.com/apps-sdk/)
+- [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)

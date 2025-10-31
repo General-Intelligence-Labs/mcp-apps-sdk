@@ -4,25 +4,24 @@ export {
   getMCPClient,
   clearMCPClient,
   clearAllMCPClients,
-} from './client.js';
+} from './client';
 
-export { listTools, callTool } from './tools.js';
-export { readResource, listResources } from './resources.js';
+export { listTools, callTool } from './tools';
+export { readResource, listResources } from './resources';
 
 export type {
   MCPClientConfig,
   MCPCapabilities,
-} from './client.js';
+} from './client';
 
 export type {
   WidgetMetaData,
   ResourceContent,
   MCPToolResult,
   MCPTool,
-} from './types.js';
+} from './types';
 
 // Re-export transports for convenience
 export { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 
 export { Client } from '@modelcontextprotocol/sdk/client/index.js';
-export type { Transport } from '@modelcontextprotocol/sdk/client/index.js';

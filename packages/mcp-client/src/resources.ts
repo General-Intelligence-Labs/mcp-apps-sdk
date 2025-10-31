@@ -1,5 +1,5 @@
 import type { Client } from '@modelcontextprotocol/sdk/client/index.js';
-import type { ResourceContent } from './types.js';
+import type { ResourceContent } from './types';
 
 export async function readResource(
   client: Client,
@@ -24,7 +24,7 @@ export async function readResource(
   }
 }
 
-export async function listResources(client: Client) {
+export async function listResources(client: Client): Promise<any[]> {
   const result = await client.listResources();
   return result.resources;
 }

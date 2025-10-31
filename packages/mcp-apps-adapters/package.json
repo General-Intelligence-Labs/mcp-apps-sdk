@@ -39,7 +39,8 @@
     "@ai-sdk/openai": "^2.0.0",
     "@ai-sdk/react": "^2.0.0",
     "@xalia/mcp-client": "workspace:*",
-    "ai": "^5.0.0"
+    "ai": "^5.0.0",
+    "zod": "^3.0.0"
   },
   "peerDependenciesMeta": {
     "@ai-sdk/openai": {
@@ -50,11 +51,16 @@
     },
     "ai": {
       "optional": true
+    },
+    "zod": {
+      "optional": true
     }
   },
   "devDependencies": {
     "@xalia/mcp-client": "workspace:*",
     "@types/node": "^20.0.0",
+    "ai": "^5.0.0",
+    "zod": "^3.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",
     "eslint": "^9.0.0"

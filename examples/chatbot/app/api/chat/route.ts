@@ -17,18 +17,18 @@ export async function POST(req: Request) {
   });
 
   // Prepare messages for the model
-  const sanitizedMessages = messages.map(({ id: _unused, ...rest }) => {
+  const sanitizedMessages = messages.map(({ id: _unused, ...rest }: any) => {
     void _unused;
     return rest;
-  }) as Parameters<typeof convertToModelMessages>[0];
+  });
 
-  const coreMessages = convertToModelMessages(sanitizedMessages, { tools });
+  const coreMessages = convertToModelMessages(sanitizedMessages as any, { tools } as any);
 
   // Stream the response with tool support
   const result = streamText({
     model: openai('gpt-4o'),
     messages: coreMessages,
-    tools,
+    tools: tools as any,
   });
 
   return result.toUIMessageStreamResponse();

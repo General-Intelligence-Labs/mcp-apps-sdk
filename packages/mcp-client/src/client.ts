@@ -1,5 +1,4 @@
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
-import type { Transport } from '@modelcontextprotocol/sdk/client/index.js';
 
 export type MCPClientConfig = {
   name: string;
@@ -27,7 +26,7 @@ export async function createMCPClient(
 
 export async function connectMCPClient(
   client: Client,
-  transport: Transport,
+  transport: any,
   clientId?: string
 ): Promise<Client> {
   await client.connect(transport);

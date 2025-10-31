@@ -4,7 +4,6 @@
     "noEmit": false,
     "outDir": "./dist",
     "rootDir": "./src",
-    "composite": true,
     "lib": ["ES2020"]
   },
   "include": ["src/**/*"],

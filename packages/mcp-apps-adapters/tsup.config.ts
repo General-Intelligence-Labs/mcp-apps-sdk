@@ -16,5 +16,6 @@ export default defineConfig({
     '@ai-sdk/openai',
     '@ai-sdk/react',
     'ai',
+    'zod',
   ],
 });
