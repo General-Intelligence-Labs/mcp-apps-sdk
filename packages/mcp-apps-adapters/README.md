@@ -1,13 +1,13 @@
-# @xalia/mcp-apps-ai-sdk
+# @xalia/mcp-apps-adapters
 
-Adapters for integrating MCP tools with popular AI SDKs.
+Adapters for integrating MCP tools with popular AI frameworks.
 
 ## Installation
 
 ```bash
-npm install @xalia/mcp-apps-ai-sdk
+npm install @xalia/mcp-apps-adapters
 # or
-pnpm add @xalia/mcp-apps-ai-sdk
+pnpm add @xalia/mcp-apps-adapters
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ pnpm add @xalia/mcp-apps-ai-sdk
 ### Vercel AI SDK
 
 ```typescript
-import { createVercelAITools } from '@xalia/mcp-apps-ai-sdk/vercel';
+import { createVercelAITools } from '@xalia/mcp-apps-adapters/vercel';
 import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 
@@ -33,7 +33,7 @@ const result = await streamText({
 ### OpenAI SDK (Coming Soon)
 
 ```typescript
-import { createOpenAIFunctions } from '@xalia/mcp-apps-ai-sdk/openai';
+import { createOpenAIFunctions } from '@xalia/mcp-apps-adapters/openai';
 
 // Convert MCP tools to OpenAI function format
 const functions = await createOpenAIFunctions(mcpClient);
@@ -44,9 +44,9 @@ const functions = await createOpenAIFunctions(mcpClient);
 - Automatic tool format conversion
 - Widget metadata handling
 - Streaming support
-- Multiple SDK adapters
+- Multiple framework adapters
 
-## Supported SDKs
+## Supported Frameworks
 
 - ✅ Vercel AI SDK
 - 🚧 OpenAI SDK (planned)

@@ -1,7 +1,7 @@
 {
-  "name": "@xalia/mcp-apps-ai-sdk",
+  "name": "@xalia/mcp-apps-adapters",
   "version": "0.1.0",
-  "description": "Adapters for integrating MCP tools with popular AI SDKs",
+  "description": "Adapters for integrating MCP tools with popular AI frameworks",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -65,14 +65,14 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/general-intelligence-labs/mcp-apps-sdk.git",
-    "directory": "packages/mcp-apps-ai-sdk"
+    "directory": "packages/mcp-apps-adapters"
   },
   "keywords": [
     "mcp",
     "openai",
     "vercel-ai",
-    "adapter",
-    "ai-sdk",
+    "adapters",
+    "integration",
     "xalia"
   ],
   "author": "General Intelligence Labs",

@@ -25,8 +25,8 @@
       "@xalia/mcp-apps-widget/*": ["../../packages/mcp-apps-widget/src/*"],
       "@xalia/mcp-client": ["../../packages/mcp-client/src"],
       "@xalia/mcp-client/*": ["../../packages/mcp-client/src/*"],
-      "@xalia/mcp-apps-ai-sdk": ["../../packages/mcp-apps-ai-sdk/src"],
-      "@xalia/mcp-apps-ai-sdk/*": ["../../packages/mcp-apps-ai-sdk/src/*"]
+      "@xalia/mcp-apps-adapters": ["../../packages/mcp-apps-adapters/src"],
+      "@xalia/mcp-apps-adapters/*": ["../../packages/mcp-apps-adapters/src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
@@ -34,6 +34,6 @@
   "references": [
     { "path": "../../packages/mcp-apps-widget" },
     { "path": "../../packages/mcp-client" },
-    { "path": "../../packages/mcp-apps-ai-sdk" }
+    { "path": "../../packages/mcp-apps-adapters" }
   ]
 }

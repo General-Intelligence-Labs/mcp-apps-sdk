@@ -16,7 +16,7 @@
     "@ai-sdk/react": "^2.0.81",
     "@xalia/mcp-apps-widget": "workspace:*",
     "@xalia/mcp-client": "workspace:*",
-    "@xalia/mcp-apps-ai-sdk": "workspace:*",
+    "@xalia/mcp-apps-adapters": "workspace:*",
     "ai": "^5.0.81",
     "next": "16.0.0",
     "react": "19.2.0",

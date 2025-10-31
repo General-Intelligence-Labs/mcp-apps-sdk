@@ -16,8 +16,8 @@ React components and utilities for rendering MCP app widgets in secure iframes w
 ### [@xalia/mcp-client](./packages/mcp-client)
 TypeScript client for connecting to and interacting with MCP servers, including tool discovery and execution.
 
-### [@xalia/mcp-apps-ai-sdk](./packages/mcp-apps-ai-sdk)
-Adapters for integrating MCP tools with popular AI SDKs like Vercel AI SDK and OpenAI.
+### [@xalia/mcp-apps-adapters](./packages/mcp-apps-adapters)
+Adapters for integrating MCP tools with popular AI frameworks like Vercel AI SDK and OpenAI.
 
 ## 🚀 Quick Start
 
@@ -65,7 +65,7 @@ mcp-apps-sdk/
 ├── packages/
 │   ├── mcp-apps-widget/     # Widget rendering components
 │   ├── mcp-client/           # MCP protocol client
-│   └── mcp-apps-ai-sdk/      # AI SDK adapters
+│   └── mcp-apps-adapters/    # AI framework adapters
 ├── examples/
 │   └── chatbot/              # Example Next.js chatbot app
 └── package.json              # Root package.json
@@ -119,12 +119,12 @@ function MyApp() {
 Use the complete SDK to build MCP-powered applications:
 
 ```bash
-npm install @xalia/mcp-client @xalia/mcp-apps-ai-sdk
+npm install @xalia/mcp-client @xalia/mcp-apps-adapters
 ```
 
 ```typescript
 import { createMCPClient, connectMCPClient } from '@xalia/mcp-client';
-import { createVercelAITools } from '@xalia/mcp-apps-ai-sdk/vercel';
+import { createVercelAITools } from '@xalia/mcp-apps-adapters/vercel';
 
 // Connect to MCP server
 const client = await createMCPClient({ name: 'my-app', version: '1.0.0' });

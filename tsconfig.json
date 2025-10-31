@@ -6,7 +6,7 @@
   "references": [
     { "path": "./packages/mcp-apps-widget" },
     { "path": "./packages/mcp-client" },
-    { "path": "./packages/mcp-apps-ai-sdk" },
+    { "path": "./packages/mcp-apps-adapters" },
     { "path": "./examples/chatbot" }
   ],
   "include": [],
