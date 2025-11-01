@@ -1,6 +1,7 @@
 # MCP Apps SDK
 
 [![CI](https://github.com/general-intelligence-labs/mcp-apps-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/general-intelligence-labs/mcp-apps-sdk/actions/workflows/ci.yml)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Chat-7289da?logo=discord&logoColor=white)](https://discord.gg/KMTMkCJ3tq)
 
 Open-source SDK for building applications with the Model Context Protocol (MCP) that is compatible with [OpenAI Apps SDK](https://developers.openai.com/apps-sdk).
 
@@ -147,6 +148,12 @@ await connectMCPClient(client, transport);
 // Convert MCP tools for use with AI SDKs
 const tools = await createVercelAITools(client);
 ```
+
+## Community
+
+Join our Discord community for discussions, support, and updates:
+
+[![Discord](https://img.shields.io/badge/Discord-Join%20our%20community-7289da?logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/KMTMkCJ3tq)
 
 ## Contributing
 
