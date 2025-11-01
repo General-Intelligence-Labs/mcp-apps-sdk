@@ -30,10 +30,5 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"],
-  "references": [
-    { "path": "../../packages/mcp-apps-widget" },
-    { "path": "../../packages/mcp-client" },
-    { "path": "../../packages/mcp-apps-adapters" }
-  ]
+  "exclude": ["node_modules"]
 }

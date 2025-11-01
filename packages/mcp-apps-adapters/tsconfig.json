@@ -1,13 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "composite": true,
+    "declaration": true,
     "noEmit": false,
     "outDir": "./dist"
   },
   "include": ["src/**/*"],
-  "exclude": ["src/**/*.test.ts", "src/**/*.spec.ts"],
-  "references": [
-    { "path": "../mcp-client" }
-  ]
+  "exclude": ["src/**/*.test.ts", "src/**/*.spec.ts"]
 }
