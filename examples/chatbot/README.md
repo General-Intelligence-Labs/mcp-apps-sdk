@@ -35,39 +35,52 @@ The MCP server must be compatible with the OpenAI Apps SDK protocol, which provi
 
 #### Quick Start with the Solar System Example
 
-The easiest way to get started is using OpenAI's Solar System example server:
+The OpenAI SDK examples are included as a git submodule in this repository. You need to run two servers: the MCP server and a static file server.
 
-1. Clone the OpenAI Apps SDK examples repository:
+**Initial Setup (one-time)**:
+
+1. Initialize and update the submodule:
 ```bash
-git clone https://github.com/openai/openai-apps-sdk-examples.git
-cd openai-apps-sdk-examples/solar-system_server_python
+# From the monorepo root
+git submodule update --init --recursive
 ```
 
-2. Create a virtual environment and install dependencies:
+2. Build the widget assets:
 ```bash
+cd examples/openai-apps-sdk-examples
+pnpm install
+pnpm run build
+```
+This creates the `assets/` folder with the Solar System widget HTML, CSS, and JavaScript files.
+
+**Running the Servers**:
+
+You need to run two servers in separate terminals:
+
+**Terminal 1 - Static File Server** (for widget assets):
+```bash
+# From examples/openai-apps-sdk-examples
+pnpm run serve
+```
+This serves the widget assets on `http://localhost:4444` with CORS enabled.
+
+**Terminal 2 - MCP Server** (for tool execution):
+```bash
+# From examples/openai-apps-sdk-examples/solar-system_server_python
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-```
 
-3. Modify the server to run on port 8002 (the example defaults to port 8000):
-   - Edit `main.py` and change the port in the uvicorn.run() call from 8000 to 8002
-   - Or use uvicorn directly: `uvicorn main:app --port 8002`
-
-4. Start the server:
-```bash
-# Option A: Modify main.py first, then run
-python main.py
-
-# Option B: Run with uvicorn directly on port 8002
+# Run on port 8002 (instead of default 8000)
 uvicorn main:app --port 8002
 ```
 
-The Solar System server provides example tools that demonstrate:
-- Tool discovery via the MCP protocol
-- Tool execution with structured responses
-- Widget rendering with interactive HTML templates
-- Proper metadata formatting for OpenAI Apps SDK compatibility
+The Solar System example consists of:
+- **MCP Server** (port 8002): Handles tool discovery and execution via the MCP protocol
+- **Static File Server** (port 4444): Serves the widget's CSS, JavaScript, and other assets
+- **Widget HTML**: Interactive 3D solar system visualization using Three.js
+
+Both servers must be running for the widgets to work properly. The chatbot example is configured to allow resources from both localhost ports in development mode.
 
 #### Creating Your Own MCP Server
 

@@ -8,7 +8,7 @@ This SDK is useful for two types of developers:
 - **Agent developers** who want to integrate MCP-based App UI into their own agents
 - **MCP App developers** who are developing MCP-based Apps that can be integrated with ChatGPT and other agents
 
-## 📦 Packages
+## Packages
 
 This monorepo contains three core packages:
 
@@ -21,7 +21,7 @@ TypeScript client for connecting to and interacting with MCP servers, including 
 ### [@xalia/mcp-apps-adapters](./packages/mcp-apps-adapters)
 Adapters for integrating MCP tools with popular AI frameworks like Vercel AI SDK and OpenAI.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 18+
@@ -31,9 +31,12 @@ Adapters for integrating MCP tools with popular AI frameworks like Vercel AI SDK
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/general-intelligence-labs/mcp-apps-sdk.git
+# Clone the repository with submodules
+git clone --recurse-submodules https://github.com/general-intelligence-labs/mcp-apps-sdk.git
 cd mcp-apps-sdk
+
+# Or if you already cloned without submodules
+git submodule update --init --recursive
 
 # Install dependencies
 pnpm install
@@ -44,33 +47,42 @@ pnpm build
 
 ### Run the Example
 
+The chatbot example requires an MCP server and a static file server for widgets. See [examples/chatbot/README.md](examples/chatbot/README.md) for detailed setup instructions.
+
+Quick start:
 ```bash
-# Navigate to the chatbot example
+# Terminal 1: Start static file server
+cd examples/openai-apps-sdk-examples
+pnpm install && pnpm build
+pnpm run serve  # Serves on port 4444
+
+# Terminal 2: Start MCP server
+cd examples/openai-apps-sdk-examples/solar-system_server_python
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --port 8002
+
+# Terminal 3: Start the chatbot
 cd examples/chatbot
-
-# Set up your OpenAI API key
-cp .env.local.example .env.local
-# Edit .env.local and add your OPENAI_API_KEY
-
-# Start the development server
 pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see the chatbot with MCP tool integration.
 
-## 💻 Development
+## Development
 
 ### Project Structure
 
 ```
 mcp-apps-sdk/
 ├── packages/
-│   ├── mcp-apps-widget/     # Widget rendering components
-│   ├── mcp-client/           # MCP protocol client
-│   └── mcp-apps-adapters/    # AI framework adapters
+│   ├── mcp-apps-widget/          # Widget rendering components
+│   ├── mcp-client/               # MCP protocol client
+│   └── mcp-apps-adapters/        # AI framework adapters
 ├── examples/
-│   └── chatbot/              # Example Next.js chatbot app
-└── package.json              # Root package.json
+│   ├── chatbot/                  # Example Next.js chatbot app
+│   └── openai-apps-sdk-examples/ # OpenAI SDK examples (git submodule)
+└── package.json                  # Root package.json
 ```
 
 ### Available Scripts
@@ -136,15 +148,15 @@ await connectMCPClient(client, transport);
 const tools = await createVercelAITools(client);
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
 
-## 📄 License
+## License
 
 MIT License - see [LICENSE](./LICENSE) for details.
 
-## 🔗 External Resources
+## External Resources
 
 - [OpenAI Apps SDK Documentation](https://developers.openai.com/apps-sdk/)
 - [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
