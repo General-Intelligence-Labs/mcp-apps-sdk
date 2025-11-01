@@ -1,7 +1,7 @@
 import os from 'os';
 import path from 'path';
-import { createFsWidgetCache } from '../packages/widget-kit/src/server';
-import type { WidgetData } from '../packages/widget-kit/src/types';
+import { createFsWidgetCache } from '@xalia/mcp-apps-widget/server';
+import type { WidgetData } from '@xalia/mcp-apps-widget';
 
 const widgetCache = createFsWidgetCache({
   cacheDir: path.join(os.tmpdir(), 'my-ai-app-widgets'),

@@ -1,0 +1,55 @@
+{
+  "compilerOptions": {
+    // Modern output for broad compatibility
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+
+    // React configuration
+    "jsx": "react-jsx",
+
+    // Strict type safety
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+
+    // Module resolution for monorepo
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+
+    // Code quality
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+
+    // Library output
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+
+    // Build performance
+    "noEmit": true,
+
+    // Path mapping for monorepo
+    "baseUrl": ".",
+    "paths": {
+      "@xalia/mcp-apps-widget": ["./packages/mcp-apps-widget/src"],
+      "@xalia/mcp-apps-widget/*": ["./packages/mcp-apps-widget/src/*"],
+      "@xalia/mcp-client": ["./packages/mcp-client/src"],
+      "@xalia/mcp-client/*": ["./packages/mcp-client/src/*"],
+      "@xalia/mcp-apps-adapters": ["./packages/mcp-apps-adapters/src"],
+      "@xalia/mcp-apps-adapters/*": ["./packages/mcp-apps-adapters/src/*"]
+    }
+  },
+  "exclude": [
+    "**/node_modules",
+    "**/dist",
+    "**/.next",
+    "**/coverage",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
+  ]
+}

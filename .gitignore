@@ -1,8 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
-/.pnp
+# Dependencies - matches node_modules anywhere in the repo
+node_modules/
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -10,15 +10,32 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
+# Testing
+coverage/
+.nyc_output/
 
-# next.js
-/.next/
-/out/
+# Build outputs - matches dist/build anywhere in the repo
+dist/
+build/
+out/
+.next/
+.turbo/
 
-# production
-/build
+# Specific package build outputs
+packages/*/dist/
+packages/*/build/
+packages/*/.next/
+packages/*/out/
+packages/*/coverage/
+packages/*/node_modules/
+
+# Specific example build outputs
+examples/*/dist/
+examples/*/build/
+examples/*/.next/
+examples/*/out/
+examples/*/coverage/
+examples/*/node_modules/
 
 # misc
 .DS_Store
@@ -29,9 +46,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+lerna-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+.env
+.env.*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +59,44 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+Thumbs.db
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Widget cache (for the example app)
+/var/
+widget-cache/
+
+# Python (for MCP server examples if needed)
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+
+# pnpm
+.pnpm-store/
+
+# Changesets (keep only README)
+.changeset/*.md
+!.changeset/README.md
