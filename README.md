@@ -3,7 +3,7 @@
 [![CI](https://github.com/general-intelligence-labs/mcp-apps-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/general-intelligence-labs/mcp-apps-sdk/actions/workflows/ci.yml)
 [![Discord](https://img.shields.io/badge/Discord-Join%20Chat-7289da?logo=discord&logoColor=white)](https://discord.gg/KMTMkCJ3tq)
 
-<img width="823" height="801" alt="Screenshot 2025-11-04 at 10 41 53 PM" src="https://github.com/user-attachments/assets/91d6b1c9-4420-42ec-9aa2-2ef59aedae06" />
+<img width="718" height="542" alt="Screenshot 2025-11-04 at 10 41 53 PM" src="https://github.com/user-attachments/assets/dc67d630-530e-4d15-9460-24f59a7cfb60" />
 
 Open-source SDK for building applications with the Model Context Protocol (MCP) that is compatible with [OpenAI Apps SDK](https://developers.openai.com/apps-sdk).
 
