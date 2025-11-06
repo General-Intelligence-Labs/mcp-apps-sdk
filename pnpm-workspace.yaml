@@ -1,3 +1,4 @@
 packages:
   - 'examples/*'
   - 'packages/*'
+  - '!examples/openai-apps-sdk-examples' # Exclude git submodule
