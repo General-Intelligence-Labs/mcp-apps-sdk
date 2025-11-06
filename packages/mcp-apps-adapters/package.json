@@ -1,6 +1,6 @@
 {
   "name": "@xalia/mcp-apps-adapters",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Adapters for integrating MCP tools with popular AI frameworks",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
