@@ -1,0 +1,86 @@
+name: Publish Packages
+
+# This workflow automatically publishes packages to npm using Changesets and Trusted Publishing (OIDC).
+#
+# How to trigger a release:
+#
+# 1. Make your code changes
+# 2. Run: pnpm changeset
+#    - Select which packages changed
+#    - Choose version bump type (major/minor/patch)
+#    - Write a description of changes
+# 3. Commit the changeset file: git add .changeset/ && git commit -m "chore: add changeset"
+# 4. Push to main: git push
+# 5. This workflow will create a "Version Packages" PR
+# 6. Review and merge the PR
+# 7. This workflow will automatically publish to npm!
+#
+# Requirements:
+# - Trusted Publishing must be configured on npm for each package
+# - Go to https://www.npmjs.com/package/@xalia/PACKAGE_NAME/access
+# - Add trusted publisher: general-intelligence-labs/mcp-apps-sdk, workflow: publish.yml
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write      # Create git tags and commits
+      pull-requests: write # Create/update version PRs
+      id-token: write      # Required for npm Trusted Publishing (OIDC)
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for changesets
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.x
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build all packages
+        run: pnpm build
+
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # This creates a PR with version bumps when changesets are added
+          # Or publishes packages when that PR is merged
+          publish: pnpm changeset publish --provenance
+          title: 'chore: version packages'
+          commit: 'chore: version packages'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
+          # No NPM_TOKEN needed! Trusted Publishing uses OIDC for authentication
+
+      - name: Publish Summary
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          echo "### 🎉 Packages Published" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The following packages were published:" >> $GITHUB_STEP_SUMMARY
+          echo '${{ steps.changesets.outputs.publishedPackages }}' | jq -r '.[] | "- **\(.name)@\(.version)**"' >> $GITHUB_STEP_SUMMARY
+
