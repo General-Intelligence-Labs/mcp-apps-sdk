@@ -96,7 +96,3 @@ env/
 
 # pnpm
 .pnpm-store/
-
-# Changesets (keep only README)
-.changeset/*.md
-!.changeset/README.md

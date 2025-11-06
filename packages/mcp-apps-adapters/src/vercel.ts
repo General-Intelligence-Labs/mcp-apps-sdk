@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import type { Client } from '@xalia/mcp-client';
 import { listTools, callTool, readResource } from '@xalia/mcp-client';
-import type { MCPTool, MCPToolResult, WidgetMetaData } from '@xalia/mcp-client';
+import type { WidgetMetaData } from '@xalia/mcp-client';
 
 // CoreTool type for Vercel AI SDK
 type CoreTool = {
