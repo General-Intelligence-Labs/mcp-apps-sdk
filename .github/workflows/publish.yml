@@ -43,6 +43,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Fetch all history for changesets
+          submodules: true # Check out git submodules (needed for example packages)
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
