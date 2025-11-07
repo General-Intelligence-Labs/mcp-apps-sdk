@@ -4,10 +4,7 @@
 [![Discord](https://img.shields.io/badge/Discord-Join%20Chat-7289da?logo=discord&logoColor=white)](https://discord.gg/KMTMkCJ3tq)
 
 <div align="center">
-  <a href="https://youtu.be/TGIOQMcGx5k">
-    <img src="https://img.youtube.com/vi/TGIOQMcGx5k/maxresdefault.jpg" alt="MCP Apps SDK Demo Video" width="80%">
-  </a>
-  <p><i>Click to watch the demo video</i></p>
+  <iframe width="720" height="405" src="https://www.youtube.com/embed/TGIOQMcGx5k" title="MCP Apps SDK Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 Open-source SDK for building applications with the Model Context Protocol (MCP) that is compatible with [OpenAI Apps SDK](https://developers.openai.com/apps-sdk).
