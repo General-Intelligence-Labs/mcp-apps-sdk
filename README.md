@@ -11,6 +11,10 @@ This SDK is useful for two types of developers:
 - **Agent developers** who want to integrate MCP-based App UI into their own agents
 - **MCP App developers** who are developing MCP-based Apps that can be integrated with ChatGPT and other agents
 
+## Demo Video
+
+https://github.com/user-attachments/assets/7d13d4f8-2da7-40b1-a102-7745a1d5cc95
+
 ## Packages
 
 This monorepo contains three core packages:
