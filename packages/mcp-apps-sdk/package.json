@@ -1,6 +1,6 @@
 {
   "name": "@xalia/mcp-apps-sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Complete SDK for building MCP-powered applications - includes client, adapters, and widgets",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -120,4 +120,3 @@
   "author": "General Intelligence Labs",
   "license": "MIT"
 }
-
