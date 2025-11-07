@@ -32,15 +32,12 @@ importers:
       '@ai-sdk/react':
         specifier: ^2.0.81
         version: 2.0.81(react@19.2.0)(zod@4.1.12)
-      '@xalia/mcp-apps-adapters':
+      '@xalia/mcp-apps-sdk':
         specifier: workspace:*
-        version: link:../../packages/mcp-apps-adapters
+        version: link:../../packages/mcp-apps-sdk
       '@xalia/mcp-apps-widget':
         specifier: workspace:*
         version: link:../../packages/mcp-apps-widget
-      '@xalia/mcp-client':
-        specifier: workspace:*
-        version: link:../../packages/mcp-client
       ai:
         specifier: ^5.0.81
         version: 5.0.81(zod@4.1.12)
@@ -103,6 +100,58 @@ importers:
       eslint:
         specifier: ^9.0.0
         version: 9.38.0(jiti@2.6.1)
+      tsup:
+        specifier: ^8.0.0
+        version: 8.5.0(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.0.0
+        version: 5.9.3
+      zod:
+        specifier: ^3.0.0
+        version: 3.25.76
+
+  packages/mcp-apps-sdk:
+    dependencies:
+      '@ai-sdk/openai':
+        specifier: ^2.0.0
+        version: 2.0.55(zod@3.25.76)
+      '@ai-sdk/react':
+        specifier: ^2.0.0
+        version: 2.0.81(react@19.2.0)(zod@3.25.76)
+      '@xalia/mcp-apps-adapters':
+        specifier: workspace:*
+        version: link:../mcp-apps-adapters
+      '@xalia/mcp-apps-widget':
+        specifier: workspace:*
+        version: link:../mcp-apps-widget
+      '@xalia/mcp-client':
+        specifier: workspace:*
+        version: link:../mcp-client
+    devDependencies:
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.23
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.2
+      '@types/react-dom':
+        specifier: ^19.0.0
+        version: 19.2.2(@types/react@19.2.2)
+      ai:
+        specifier: ^5.0.0
+        version: 5.0.81(zod@3.25.76)
+      eslint:
+        specifier: ^9.0.0
+        version: 9.38.0(jiti@2.6.1)
+      next:
+        specifier: ^16.0.0
+        version: 16.0.0(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      react:
+        specifier: ^19.0.0
+        version: 19.2.0
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.0(react@19.2.0)
       tsup:
         specifier: ^8.0.0
         version: 8.5.0(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)

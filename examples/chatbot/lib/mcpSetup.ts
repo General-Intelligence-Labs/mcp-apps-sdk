@@ -3,7 +3,7 @@ import {
   connectMCPClient,
   StreamableHTTPClientTransport,
   type Client,
-} from '@xalia/mcp-client';
+} from '@xalia/mcp-apps-sdk';
 
 let mcpClient: Client | null = null;
 

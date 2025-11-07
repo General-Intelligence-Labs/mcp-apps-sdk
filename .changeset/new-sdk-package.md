@@ -1,0 +1,13 @@
+---
+"@xalia/mcp-apps-sdk": minor
+---
+
+Add new umbrella package @xalia/mcp-apps-sdk for simplified installation
+
+This package provides a unified entry point to all MCP SDK components:
+- MCP Client for connecting to MCP servers
+- Adapters for integrating with AI frameworks (OpenAI, Vercel AI SDK)
+- Widget components for rendering MCP apps
+
+Users can now install everything with a single command:
+npm install @xalia/mcp-apps-sdk
