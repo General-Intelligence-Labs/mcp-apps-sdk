@@ -36,11 +36,6 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./widget/server": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    },
     "./package.json": "./package.json"
   },
   "files": [

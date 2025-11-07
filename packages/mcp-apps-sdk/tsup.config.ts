@@ -22,6 +22,9 @@ export {
   AssistantAppEmbed,
   type AssistantAppEmbedProps
 } from '@xalia/mcp-apps-widget';
+
+// NOTE: Widget server utilities are NOT exported from the main entry point
+// Import them from '@xalia/mcp-apps-sdk/widget/server' instead
 `;
 
 export default defineConfig({

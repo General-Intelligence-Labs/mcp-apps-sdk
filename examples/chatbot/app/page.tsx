@@ -2,7 +2,7 @@
 
 import { useChat } from '@ai-sdk/react';
 import { useState } from 'react';
-import { AssistantAppEmbed } from '@xalia/mcp-apps-widget';
+import { AssistantAppEmbed } from '@xalia/mcp-apps-sdk';
 
 export default function Chat() {
   const [input, setInput] = useState('');

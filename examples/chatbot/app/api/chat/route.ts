@@ -1,6 +1,6 @@
 import { openai } from '@ai-sdk/openai';
 import { streamText, convertToModelMessages } from 'ai';
-import { createVercelAITools } from '@xalia/mcp-apps-adapters/vercel';
+import { createVercelAITools } from '@xalia/mcp-apps-sdk';
 import { getMCPClient } from '@/lib/mcpSetup';
 
 export async function POST(req: Request) {

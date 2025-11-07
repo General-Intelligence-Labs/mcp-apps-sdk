@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@xalia/mcp-apps-widget':
-        specifier: ^0.2.0
-        version: 0.2.0(next@16.0.0(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
     devDependencies:
       '@changesets/cli':
         specifier: ^2.27.0
@@ -36,15 +32,12 @@ importers:
       '@ai-sdk/react':
         specifier: ^2.0.81
         version: 2.0.81(react@19.2.0)(zod@4.1.12)
-      '@xalia/mcp-apps-adapters':
+      '@xalia/mcp-apps-sdk':
         specifier: workspace:*
-        version: link:../../packages/mcp-apps-adapters
+        version: link:../../packages/mcp-apps-sdk
       '@xalia/mcp-apps-widget':
-        specifier: ^0.2.0
-        version: 0.2.0(next@16.0.0(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@xalia/mcp-client':
         specifier: workspace:*
-        version: link:../../packages/mcp-client
+        version: link:../../packages/mcp-apps-widget
       ai:
         specifier: ^5.0.81
         version: 5.0.81(zod@4.1.12)
@@ -1244,16 +1237,6 @@ packages:
   '@vercel/oidc@3.0.3':
     resolution: {integrity: sha512-yNEQvPcVrK9sIe637+I0jD6leluPxzwJKx/Haw6F4H77CdDsszUn5V3o96LPziXkSNE2B83+Z3mjqGKBK/R6Gg==}
     engines: {node: '>= 20'}
-
-  '@xalia/mcp-apps-widget@0.2.0':
-    resolution: {integrity: sha512-Vo0l0SyRagNbBsRig99JZvcpDUc3le5UiDchdaUdDWnK0S5lq5oaUawfkVsx70rxx4ZYnOo4RkNhgLYO+/S65Q==}
-    peerDependencies:
-      next: ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-      react: ^18.0.0 || ^19.0.0
-      react-dom: ^18.0.0 || ^19.0.0
-    peerDependenciesMeta:
-      next:
-        optional: true
 
   accepts@2.0.0:
     resolution: {integrity: sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==}
@@ -4128,14 +4111,6 @@ snapshots:
     optional: true
 
   '@vercel/oidc@3.0.3': {}
-
-  '@xalia/mcp-apps-widget@0.2.0(next@16.0.0(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
-    dependencies:
-      clsx: 2.1.1
-      react: 19.2.0
-      react-dom: 19.2.0(react@19.2.0)
-    optionalDependencies:
-      next: 16.0.0(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
 
   accepts@2.0.0:
     dependencies:

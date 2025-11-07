@@ -44,3 +44,7 @@ export {
   type AssistantAppEmbedProps
 } from '@xalia/mcp-apps-widget';
 
+// NOTE: Widget server utilities (createWidgetStoreHandler, createWidgetRenderHandler, etc.)
+// are NOT exported from the main entry point because they use Node.js APIs (fs, os, path)
+// that cannot be used in browser/client code. Import them from '@xalia/mcp-apps-sdk/widget/server' instead.
+
