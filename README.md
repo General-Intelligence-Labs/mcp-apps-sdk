@@ -14,10 +14,40 @@ This SDK is useful for two types of developers:
 ## Demo Video
 
 https://github.com/user-attachments/assets/7d13d4f8-2da7-40b1-a102-7745a1d5cc95
+## Installation
+
+Get started quickly with a single command:
+
+```bash
+npm install @xalia/mcp-apps-sdk
+```
+
+This installs everything you need to build MCP-powered applications! ✨
+
+### What's Included
+
+- **MCP Client** - Connect to and communicate with MCP servers
+- **Adapters** - Integrate with popular AI frameworks (OpenAI, Vercel AI SDK)
+- **Widget Components** - React components for rendering MCP app interfaces
+
+### Alternative: Modular Installation
+
+For advanced users who want smaller bundle sizes, install only what you need:
+
+```bash
+# For agent developers - render MCP app widgets only
+npm install @xalia/mcp-apps-widget
+
+# For MCP app developers - client and adapters only
+npm install @xalia/mcp-client @xalia/mcp-apps-adapters
+```
 
 ## Packages
 
-This monorepo contains three core packages:
+This monorepo contains four packages:
+
+### [@xalia/mcp-apps-sdk](./packages/mcp-apps-sdk) ⭐
+**Complete SDK** - Unified package with everything you need. Install this for the simplest setup.
 
 ### [@xalia/mcp-apps-widget](./packages/mcp-apps-widget)
 React components and utilities for rendering MCP app widgets in secure iframes with PostMessage communication.
@@ -83,6 +113,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the chatbot with MCP 
 ```
 mcp-apps-sdk/
 ├── packages/
+│   ├── mcp-apps-sdk/             # ⭐ Complete SDK (umbrella package)
 │   ├── mcp-apps-widget/          # Widget rendering components
 │   ├── mcp-client/               # MCP protocol client
 │   └── mcp-apps-adapters/        # AI framework adapters
@@ -111,11 +142,51 @@ pnpm lint
 pnpm clean
 ```
 
-## 📚 Using the Packages
+## 📚 Usage
+
+### Simple Import (Recommended)
+
+Install the complete SDK and import everything from one place:
+
+```bash
+npm install @xalia/mcp-apps-sdk
+```
+
+```typescript
+import { 
+  createMCPClient, 
+  connectMCPClient,
+  createVercelAITools,
+  AssistantAppEmbed 
+} from '@xalia/mcp-apps-sdk';
+
+// Connect to MCP server
+const client = await createMCPClient({ name: 'my-app', version: '1.0.0' });
+await connectMCPClient(client, transport);
+
+// Convert MCP tools for use with AI SDKs
+const tools = await createVercelAITools(client);
+```
+
+### Modular Imports (For Optimized Bundle Size)
+
+Use specific entry points when you need fine-grained control:
+
+```typescript
+// Client only
+import { createMCPClient } from '@xalia/mcp-apps-sdk/client';
+
+// Adapters
+import { createOpenAIFunctions } from '@xalia/mcp-apps-sdk/adapters/openai';
+import { createVercelAITools } from '@xalia/mcp-apps-sdk/adapters/vercel';
+
+// Widget components
+import { AssistantAppEmbed } from '@xalia/mcp-apps-sdk/widget';
+```
 
 ### For Agent Developers
 
-Install the widget package to render MCP app widgets:
+If you only need to render MCP app widgets:
 
 ```bash
 npm install @xalia/mcp-apps-widget
@@ -133,26 +204,6 @@ function MyApp() {
     />
   );
 }
-```
-
-### For MCP App Developers
-
-Use the complete SDK to build MCP-powered applications:
-
-```bash
-npm install @xalia/mcp-client @xalia/mcp-apps-adapters
-```
-
-```typescript
-import { createMCPClient, connectMCPClient } from '@xalia/mcp-client';
-import { createVercelAITools } from '@xalia/mcp-apps-adapters/vercel';
-
-// Connect to MCP server
-const client = await createMCPClient({ name: 'my-app', version: '1.0.0' });
-await connectMCPClient(client, transport);
-
-// Convert MCP tools for use with AI SDKs
-const tools = await createVercelAITools(client);
 ```
 
 ## Community
